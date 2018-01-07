@@ -1,2 +1,12 @@
-<h1>Strategies#momentum</h1>
-<p>Find me in app/views/strategies/momentum.html.erb</p>
+<h1>SF Momentum</h1>
+
+<h2>Data <%= @target_date %><br> perkam ir laikom</h2>
+<% @sorted_data.first(3).each do |k, value| %>
+	<p><strong><%= value[:name] %> = <%= value[:momentum] %></strong><p>
+<% end %>
+
+<h4>Likusieji</h4>
+<% data = @sorted_data.slice(3, @sorted_data.size-1) %>
+<% data.each do |k, value| %>
+	<p><%= value[:name] %> = <%= value[:momentum] %></p>
+<% end %>

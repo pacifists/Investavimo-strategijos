@@ -49,5 +49,13 @@ class StrategiesController < ApplicationController
   	# vieno menesio laikotarpiui perkam ir laikom 3 pozicijas inertiškiausias
   	# inertiškumas tai kaina dabar / kainos prieš 12 mėnesių
   	# tada sureitinguojam koks gaunasi santykis. 3 didžiausius perkam, kitus parduodam
+  	stocks = Stock.where(:stock_type => 'stock').all
+  	@target_date = Date.parse("2017-12-29")
+  	best_stocks = {0 => {:momentum => 5, :name => 'CASH'}}
+  	stocks.each do |s|
+  		best_stocks[s.id] = {:momentum => s.get_stock_momentum(@target_date), :name => s.name}
+  	end
+  	@sorted_data = best_stocks.sort_by {|k, v| v[:momentum]}.reverse
+
   end
 end
