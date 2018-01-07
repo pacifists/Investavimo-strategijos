@@ -46,16 +46,19 @@ class StrategiesController < ApplicationController
   end
 
   def momentum
-  	# vieno menesio laikotarpiui perkam ir laikom 3 pozicijas inertiškiausias
-  	# inertiškumas tai kaina dabar / kainos prieš 12 mėnesių
-  	# tada sureitinguojam koks gaunasi santykis. 3 didžiausius perkam, kitus parduodam
-  	stocks = Stock.where(:stock_type => 'stock').all
-  	@target_date = Date.parse("2017-12-29")
-  	best_stocks = {0 => {:momentum => 5, :name => 'CASH'}}
-  	stocks.each do |s|
-  		best_stocks[s.id] = {:momentum => s.get_stock_momentum(@target_date), :name => s.name}
-  	end
-  	@sorted_data = best_stocks.sort_by {|k, v| v[:momentum]}.reverse
+  	# we buy 3 positions out of 8 (7 etfs and cash it has momentum 1 all the time)
+  	# we pick the ones that have biggest inertion
+  	# inertion is price now compared to price 1, 3, 6, 9, 12 months ago
+  	# then we rate from biggest to lowest and take first 3
+  	unless params[:date].blank?
+	  	stocks = Stock.where(:stock_type => 'stock').all
+	  	@target_date = Date.parse(params[:date])
+	  	best_stocks = {0 => {:momentum => 5, :name => 'CASH'}}
+	  	stocks.each do |s|
+	  		best_stocks[s.id] = {:momentum => s.get_stock_momentum(@target_date), :name => s.name}
+	  	end
+	  	@sorted_data = best_stocks.sort_by {|k, v| v[:momentum]}.reverse
+	  end
 
   end
 end

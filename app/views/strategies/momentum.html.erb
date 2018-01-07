@@ -1,12 +1,20 @@
 <h1>SF Momentum</h1>
 
-<h2>Data <%= @target_date %><br> perkam ir laikom</h2>
-<% @sorted_data.first(3).each do |k, value| %>
-	<p><strong><%= value[:name] %> = <%= value[:momentum] %></strong><p>
+<%= form_tag({:action => :momentum}, method: "get") do %>
+  <%= label_tag(:date, "Data:") %>
+  <%= text_field_tag(:date) %>
+  <%= submit_tag("Skaičiuoti") %>
 <% end %>
 
-<h4>Likusieji</h4>
-<% data = @sorted_data.slice(3, @sorted_data.size-1) %>
-<% data.each do |k, value| %>
-	<p><%= value[:name] %> = <%= value[:momentum] %></p>
+<% unless params[:date].blank? %>
+	<h2>Data <%= @target_date %><br> perkam ir laikom</h2>
+	<% @sorted_data.first(3).each do |k, value| %>
+		<p><strong><%= value[:name] %> = <%= value[:momentum] %></strong><p>
+	<% end %>
+
+	<h4>Likusieji</h4>
+	<% data = @sorted_data.slice(3, @sorted_data.size-1) %>
+	<% data.each do |k, value| %>
+		<p><%= value[:name] %> = <%= value[:momentum] %></p>
+	<% end %>
 <% end %>
