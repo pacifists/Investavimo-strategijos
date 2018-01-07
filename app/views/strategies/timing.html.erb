@@ -1,0 +1,38 @@
+<h1>SF Timing</h1>
+<% @stocks.each do |s| %>
+<div style="display: inline-block; position: relative; padding: 10px;">
+	<h3>
+		<%= s[:stock] %> (<%= s[:percent] %>%)
+	</h3>
+	<% cycle = 0 %>
+	<% target_row = s[:tseries].find{ |hash| hash["timestamp"] == @target_date} %>
+	<p>
+		Data: <%= target_row["timestamp"] %>
+	</p>
+	<p>
+		Close: <%= target_row["close"] %>
+	</p>
+	<p>
+		<%
+			latest_sma = 0
+			s[:sma]["Technical Analysis: SMA"].each do |key, val|
+				if key == @target_date
+					latest_sma = val["SMA"]
+					break
+				end
+			end
+		%>
+		SMA = <%= latest_sma %>
+	</p>
+	<p>
+		<strong>
+		<% if target_row["close"] >= latest_sma then %>
+			Perkam / Laikom
+		<% else %>
+			Parduodam
+		<% end %>
+		</strong>
+	</p>
+</div>
+<% end %>
+

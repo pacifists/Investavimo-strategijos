@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Investavimas</title>
+
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  </head>
+
+  <body>
+
+    <div class="container">
+      <header class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills float-right">
+            <li class="nav-item">
+            	<%= link_to "Pradžia", root_url, { class: "nav-link active" } %>
+            </li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Investavimo strategijos</h3>
+      </header>
+
+      <main role="main">
+				<%= yield %>
+      </main>
+
+      <footer class="footer">
+        <p>&copy; Rytis 2017</p>
+      </footer>
+
+    </div> <!-- /container -->
+  </body>
+</html>
+

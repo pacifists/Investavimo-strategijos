@@ -1,0 +1,57 @@
+<%= form_with(model: stock_info, local: true) do |form| %>
+  <% if stock_info.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(stock_info.errors.count, "error") %> prohibited this stock_info from being saved:</h2>
+
+      <ul>
+      <% stock_info.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :stock_id %>
+    <%= form.text_field :stock_id, id: :stock_info_stock_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :stock_date %>
+    <%= form.date_select :stock_date, id: :stock_info_stock_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :open %>
+    <%= form.text_field :open, id: :stock_info_open %>
+  </div>
+
+  <div class="field">
+    <%= form.label :high %>
+    <%= form.text_field :high, id: :stock_info_high %>
+  </div>
+
+  <div class="field">
+    <%= form.label :low %>
+    <%= form.text_field :low, id: :stock_info_low %>
+  </div>
+
+  <div class="field">
+    <%= form.label :close %>
+    <%= form.text_field :close, id: :stock_info_close %>
+  </div>
+
+  <div class="field">
+    <%= form.label :adj_close %>
+    <%= form.text_field :adj_close, id: :stock_info_adj_close %>
+  </div>
+
+  <div class="field">
+    <%= form.label :volume %>
+    <%= form.number_field :volume, id: :stock_info_volume %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
