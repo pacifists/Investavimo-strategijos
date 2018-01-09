@@ -1,9 +1,19 @@
 <h1>SF Momentum</h1>
 
 <%= form_tag({:action => :momentum}, method: "get") do %>
-  <%= label_tag(:date, "Data:") %>
-  <%= text_field_tag(:date) %>
-  <%= submit_tag("Skaičiuoti") %>
+	<div class='input-group date' id='datetimepicker1' style="padding-bottom: 20px;">
+	  <%= label_tag(:date, "Data:") %>
+	  <%= text_field_tag(:date, Date.current, {"class" => "datepicker form-control", "style" => "width: 200px;"}) %>
+	  <%= submit_tag("Skaičiuoti") %>
+	</div>
+	<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker({
+    	format: "yyyy-mm-dd",
+    	weekStart: 1
+		});
+  });
+</script>
 <% end %>
 
 <% unless params[:date].blank? %>
